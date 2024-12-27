@@ -1,0 +1,16 @@
+-   TÍCH HỢP AFFINA
+
+    -   [Bắt đầu](affina/vi/getting-started.md)
+    -   [Nhật ký thay đổi](affina/vi/change-log.md)
+    -   [Xem điểm LynkiD](affina/vi/view-point.md)
+    -   [Lấy danh mục](affina/vi/get-all-category.md)
+    -   [Lấy danh sách quà](affina/vi/get-list-gift.md)
+    -   [Chi tiết quà](affina/vi/get-gift-detail.md)
+    -   [Yêu cầu đổi quà](affina/vi/request-redeem-gift.md)
+    -   [Xác nhận OTP đổi quà](affina/vi/verify-otp-redeem-gift.md)
+    -   [Lịch sử đổi quà](affina/vi/get-redeem-transaction.md)
+    -   [Chi tiết giao dịch đổi quà](affina/vi/get-redeem-tx-detail.md)
+    -   [Thành phố, quận, phường](affina/vi/get-city-district-ward.md)
+    -   [Khởi tạo liên kết LynkiD](affina/vi/init-lynkid-connection.md)
+    -   [Xác nhận OTP liên kết LynkiD](affina/vi/verifyotp-lynkid-connection.md)
+    -   [Bảng mã lỗi](affina/vi/error_codes.md)

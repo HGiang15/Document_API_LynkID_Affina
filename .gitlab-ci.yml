@@ -1,0 +1,78 @@
+stages:
+  #- test
+  #- analysis
+  - build
+  - deploy
+
+variables:
+  DOCKER_DRIVER: overlay2
+  RUNNER_ID: ${CI_JOB_ID}
+  CONTAINER_RELEASE_IMAGE: ${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHORT_SHA}
+  IMAGE_NAME: ${CI_COMMIT_REF_NAME}_${CI_COMMIT_SHORT_SHA}
+
+# BUILD
+build:UAT:
+  tags:
+    - build
+    - linkid
+    - uat
+  variables:
+    #K8s variable section
+    NAMESPACE: "wiki-uat"
+    STS_NAME: "docs"
+  stage: build
+  script:
+    - sh ./cicd/build.sh
+  only:
+    - uat
+
+build:PROD:
+  tags:
+    - build
+    - linkid
+    - prod
+  variables:
+    #K8s variable section
+    NAMESPACE: "wiki-uat"
+    STS_NAME: "docs"
+  stage: build
+  script:
+    - sh ./cicd/build.sh
+  only:
+    - main
+
+# DEPLOY
+
+deploy:UAT:
+  tags:
+    - deploy
+    - vpid
+    - uat
+  variables:
+    #K8s variable section
+    NAMESPACE: "wiki-uat"
+    STS_NAME: "docs"
+  stage: deploy
+  script:
+    - sh ./cicd/deploy.sh
+  only:
+    - uat
+
+deploy:PROD:
+  tags:
+    - deploy
+    - vpid
+    - production
+  variables:
+    #K8s variable section
+    NAMESPACE: "wiki"
+    STS_NAME: "docs"
+  stage: deploy
+  script:
+    - sh ./cicd/deploy.sh
+  when: manual
+  only:
+    - main
+
+
+# ADD ONE MORE LINE FOR TESTING...

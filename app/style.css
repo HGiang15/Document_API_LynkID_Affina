@@ -1,0 +1,16 @@
+.center-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.app-nav li ul {
+  padding: 10px 20px;
+}
+
+.app-nav li ul li {
+  margin: 8px 14px 8px 0px;
+}

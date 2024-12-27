@@ -1,0 +1,72 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  namespace: %NAMESPACE%
+  name: %STS_NAME%
+spec:
+  selector:
+    matchLabels:
+      app: %STS_NAME%
+  serviceName: %STS_NAME%
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: %STS_NAME%
+        tier: %NAMESPACE%
+        type: stateful
+    spec:
+      containers:
+      - name: %STS_NAME%
+        image: %CONTAINER_RELEASE_IMAGE%
+        imagePullPolicy: IfNotPresent
+        # resources:
+        #   requests:
+        #     memory: "100Mi"
+        #     cpu: "50m"
+        #   limits:
+        #     memory: "500Mi"
+        #     cpu: "600m"
+        ports:
+        - containerPort: 80
+      #   volumeMounts:
+      #     - name: logs
+      #       mountPath: /data/AKC-Logs/
+      #     - name: images
+      #       mountPath: /data/app/public/images/
+      #     - name: files
+      #       mountPath: /data/app/public/files/
+      # volumes:
+      # - name: files
+      #   nfs:
+      #     server: %EFS%
+      #     path: /pvs/efs-%PVC%/%MERCHANT_EFS_CONFIG_PATH%/files
+      # - name: images
+      #   nfs:
+      #     server: %EFS%
+      #     path: /pvs/efs-%PVC%/%MERCHANT_EFS_CONFIG_PATH%/images
+      imagePullSecrets:
+      - name: regcred
+  # volumeClaimTemplates:
+  # - metadata:
+  #     name: logs
+  #   spec:
+  #     accessModes: [ "ReadWriteOnce" ]
+  #     resources:
+  #       requests:
+  #         storage: 10Gi
+          #---
+          #apiVersion: autoscaling/v1
+          #kind: HorizontalPodAutoscaler
+          #metadata:
+          #  namespace: %NAMESPACE%
+          #  name: %STS_NAME%
+          #spec:
+          #  maxReplicas: 10
+          #  minReplicas: 2
+          #  scaleTargetRef:
+          #    apiVersion: apps/v1
+          #    kind: StatefulSet
+          #    name: %STS_NAME%
+          #  targetCPUUtilizationPercentage: 75
